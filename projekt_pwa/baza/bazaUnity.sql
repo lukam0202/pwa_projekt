@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2026 at 02:46 PM
+-- Generation Time: Jun 21, 2026 at 03:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,6 +41,7 @@ CREATE TABLE `korisnik` (
 --
 
 INSERT INTO `korisnik` (`id`, `ime`, `prezime`, `korisnicko_ime`, `lozinka`, `razina`) VALUES
+(0, 'Admin', 'Admin', 'admin', '$2y$10$RMZ38mRuxWFK6WnwplhjWuK/rpxRGLdTImVDAOk7nLDos0eKt97oW', 1),
 (1, 'Korisnik', 'Korisnik', 'korisnik', '$2y$10$SETqKRzqVdw6Vdt09cDKge78buPICaohy.eu8tK6tn3mGhAweQqOm', 0);
 
 -- --------------------------------------------------------
@@ -66,7 +67,7 @@ CREATE TABLE `vijesti` (
 
 INSERT INTO `vijesti` (`id`, `datum`, `naslov`, `sazetak`, `tekst`, `slika`, `kategorija`, `arhiva`) VALUES
 (1, '20.06.2026.', 'Hollow Knight', '2D akcijski Metroidvania', 'Hollow Knight je prodao više od milijun primjeraka na PC-u.', 'Hollow_Knight.jpg', 'Igre', 0),
-(2, '20.06.2026.', 'Cuphead', 'Developeri Cupheada već pripremaju svoju sljedeću igru', 'Studio je naveo kako bi igra mogla, kad je u pitanju težina ponuditi nešto drugačije iskustvo od Cupheada.', 'Cuphead.png', 'Igre', 0),
+(2, '20.06.2026.', 'Cuphead', 'Developeri Cupheada već pripremaju svoju sljedeću igru', 'Studio je naveo kako bi igra mogla, kad je u pitanju težina ponuditi nešto drugačije iskustvo od Cupheada.', 'Cuphead.png', 'Igre', 1),
 (3, '21.06.2026.', 'Hollow Knight Silksong', 'Hollow Knight: Silksong prodao se u 7 milijuna primjeraka, ekspanzija će biti besplatna', 'Hollow Knight: Silksong će u 2026. dobiti ekspanziju zvanu Sea of Sorrow. U njoj ćemo vidjeti nova područja, boss protivnike, alate i još mnogo toga. Bit će to ekspanzija podvodne tematike, a fanove će razveseliti i informacija da će ju svi vlasnici igre dobiti besplatno.', 'Silksong.jpg', 'Igre', 0),
 (4, '20.06.2026.', 'Ori and the Blind Forest', 'U planu je treća igra iz platformerskog serijala Ori', 'Voditelj studija, Thomas Mahler, za Game Informer je izjavio kako u planu ima barem još jednu Ori igru.', 'Ori.jpg', 'Igre', 0),
 (5, '20.06.2026.', 'Unity x Epic Games', 'Udružili se Epic Games i Unity', 'Došla najava da su te dvije tvrtke dogovorile suradnju te da će Unity “na stražnja vrata” ući na Epicovu platformu.', 'unityEpic.png', 'Ucenje', 0),
