@@ -1,0 +1,5 @@
+Korisničko ime: admin
+Lozinka: admin
+
+Korisničko ime: korisnik
+Lozinka: 123
