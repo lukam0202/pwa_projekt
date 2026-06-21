@@ -54,7 +54,7 @@ if ($row) {
                 <p class="category"><?php echo $nazivKategorije; ?></p>
                 <h1 class="title"><?php echo $row['naslov']; ?></h1>
 
-                <p class="info">AUTOR: Luka Mikić</p>
+                <p class="info">AUTOR: <?php echo $row['autor']; ?></p>
                 <p class="info">OBJAVLJENO: <?php echo $row['datum']; ?></p>
 
                 <section class="slika">
@@ -81,7 +81,7 @@ if ($row) {
 
     <footer>
         <p>Luka Mikić</p>
-        <p>luka.mikic14@gmail.com</p>
+        <p>luka.mikic@tvz.hr</p>
         <p>2026</p>
         <hr>
     </footer>

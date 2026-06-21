@@ -202,7 +202,7 @@ mysqli_close($dbc);
 
     <footer>
         <p>Luka Mikić</p>
-        <p>luka.mikic14@gmail.com</p>
+        <p>luka.mikic@tvz.hr</p>
         <p>2026</p>
         <hr>
     </footer>

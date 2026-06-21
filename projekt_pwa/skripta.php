@@ -1,27 +1,38 @@
 <?php
+session_start();
 include 'connect.php';
 define('UPLPATH', 'img/');
 
-$naslov     = isset($_POST['naslov']) ? $_POST['naslov'] : '';
-$sazetak    = isset($_POST['sazetak']) ? $_POST['sazetak'] : '';
-$tekst      = isset($_POST['tekst']) ? $_POST['tekst'] : '';
+$naslov     = isset($_POST['naslov']) ? trim($_POST['naslov']) : '';
+$sazetak    = isset($_POST['sazetak']) ? trim($_POST['sazetak']) : '';
+$tekst      = isset($_POST['tekst']) ? trim($_POST['tekst']) : '';
 $kategorija = isset($_POST['kategorija']) ? $_POST['kategorija'] : '';
 $datum      = date('d.m.Y.');
 
 $arhiva = isset($_POST['archive']) ? 1 : 0;
 
-$slika = '';
-if (isset($_FILES['slika']) && $_FILES['slika']['name'] != '') {
-    $slika = $_FILES['slika']['name'];
-    $target = UPLPATH . $slika;
-    move_uploaded_file($_FILES['slika']['tmp_name'], $target);
+// Autor je prijavljeni korisnik (ime i prezime), ili "Nepoznato" ako nitko nije prijavljen
+$autor = (isset($_SESSION['username']) && isset($_SESSION['ime']) && isset($_SESSION['prezime']))
+    ? $_SESSION['ime'] . ' ' . $_SESSION['prezime']
+    : 'Nepoznato';
+
+$slikaOdabrana = isset($_FILES['slika']) && $_FILES['slika']['name'] != '';
+
+// Backend provjera - obvezna polja ne smiju ostati prazna (osim ako je JS na formi zaobiđen)
+if ($naslov == '' || $sazetak == '' || $tekst == '' || $kategorija == '' || !$slikaOdabrana) {
+    header('Location: unos.html');
+    exit;
 }
 
-$sql = "INSERT INTO vijesti (datum, naslov, sazetak, tekst, slika, kategorija, arhiva) VALUES (?, ?, ?, ?, ?, ?, ?)";
+$slika = $_FILES['slika']['name'];
+$target = UPLPATH . $slika;
+move_uploaded_file($_FILES['slika']['tmp_name'], $target);
+
+$sql = "INSERT INTO vijesti (datum, naslov, sazetak, tekst, slika, autor, kategorija, arhiva) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = mysqli_stmt_init($dbc);
 
 if (mysqli_stmt_prepare($stmt, $sql)) {
-    mysqli_stmt_bind_param($stmt, 'ssssssi', $datum, $naslov, $sazetak, $tekst, $slika, $kategorija, $arhiva);
+    mysqli_stmt_bind_param($stmt, 'sssssssi', $datum, $naslov, $sazetak, $tekst, $slika, $autor, $kategorija, $arhiva);
     mysqli_stmt_execute($stmt);
 }
 
@@ -62,7 +73,7 @@ $nazivKategorije = ($kategorija == 'Ucenje') ? 'Učenje' : $kategorija;
             <p class="category"><?php echo $nazivKategorije; ?></p>
             <h1 class="title"><?php echo $naslov; ?></h1>
 
-            <p class="info">AUTOR: Luka Mikić</p>
+            <p class="info">AUTOR: <?php echo $autor; ?></p>
             <p class="info">OBJAVLJENO: <?php echo $datum; ?></p>
 
             <section class="slika">
@@ -89,7 +100,7 @@ $nazivKategorije = ($kategorija == 'Ucenje') ? 'Učenje' : $kategorija;
 
     <footer>
         <p>Luka Mikić</p>
-        <p>luka.mikic14@gmail.com</p>
+        <p>luka.mikic@tvz.hr</p>
         <p>2026</p>
         <hr>
     </footer>

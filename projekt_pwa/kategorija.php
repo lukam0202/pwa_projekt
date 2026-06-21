@@ -71,7 +71,7 @@ if (mysqli_stmt_prepare($stmt, $sql)) {
 
     <footer>
         <p>Luka Mikić</p>
-        <p>luka.mikic14@gmail.com</p>
+        <p>luka.mikic@tvz.hr</p>
         <p>2026</p>
         <hr>
     </footer>

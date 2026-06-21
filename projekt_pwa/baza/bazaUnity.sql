@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2026 at 03:32 PM
+-- Generation Time: Jun 21, 2026 at 04:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,7 +44,8 @@ CREATE TABLE `korisnik` (
 
 INSERT INTO `korisnik` (`id`, `ime`, `prezime`, `korisnicko_ime`, `lozinka`, `razina`) VALUES
 (0, 'Admin', 'Admin', 'admin', '$2y$10$RMZ38mRuxWFK6WnwplhjWuK/rpxRGLdTImVDAOk7nLDos0eKt97oW', 1),
-(1, 'Korisnik', 'Korisnik', 'korisnik', '$2y$10$SETqKRzqVdw6Vdt09cDKge78buPICaohy.eu8tK6tn3mGhAweQqOm', 0);
+(1, 'Korisnik', 'Korisnik', 'korisnik', '$2y$10$SETqKRzqVdw6Vdt09cDKge78buPICaohy.eu8tK6tn3mGhAweQqOm', 0),
+(2, 'Testni', 'Testić', 'testtest', '$2y$10$J74c7z54NcCWYrCfHeGlOeLZ9SJ1h.TTLtmCS2mx7A7SEiJCzQil.', 0);
 
 -- --------------------------------------------------------
 
@@ -59,6 +60,7 @@ CREATE TABLE `vijesti` (
   `sazetak` text NOT NULL,
   `tekst` text NOT NULL,
   `slika` varchar(64) NOT NULL,
+  `autor` varchar(64) NOT NULL DEFAULT 'Nepoznato',
   `kategorija` varchar(64) NOT NULL,
   `arhiva` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -67,15 +69,15 @@ CREATE TABLE `vijesti` (
 -- Dumping data for table `vijesti`
 --
 
-INSERT INTO `vijesti` (`id`, `datum`, `naslov`, `sazetak`, `tekst`, `slika`, `kategorija`, `arhiva`) VALUES
-(1, '20.06.2026.', 'Hollow Knight', '2D akcijski Metroidvania', 'Hollow Knight je prodao više od milijun primjeraka na PC-u.', 'Hollow_Knight.jpg', 'Igre', 0),
-(2, '20.06.2026.', 'Cuphead', 'Developeri Cupheada već pripremaju svoju sljedeću igru', 'Studio je naveo kako bi igra mogla, kad je u pitanju težina ponuditi nešto drugačije iskustvo od Cupheada.', 'Cuphead.png', 'Igre', 1),
-(3, '21.06.2026.', 'Hollow Knight Silksong', 'Hollow Knight: Silksong prodao se u 7 milijuna primjeraka, ekspanzija će biti besplatna', 'Hollow Knight: Silksong će u 2026. dobiti ekspanziju zvanu Sea of Sorrow. U njoj ćemo vidjeti nova područja, boss protivnike, alate i još mnogo toga. Bit će to ekspanzija podvodne tematike, a fanove će razveseliti i informacija da će ju svi vlasnici igre dobiti besplatno.', 'Silksong.jpg', 'Igre', 0),
-(4, '20.06.2026.', 'Ori and the Blind Forest', 'U planu je treća igra iz platformerskog serijala Ori', 'Voditelj studija, Thomas Mahler, za Game Informer je izjavio kako u planu ima barem još jednu Ori igru.', 'Ori.jpg', 'Igre', 0),
-(5, '20.06.2026.', 'Unity x Epic Games', 'Udružili se Epic Games i Unity', 'Došla najava da su te dvije tvrtke dogovorile suradnju te da će Unity “na stražnja vrata” ući na Epicovu platformu.', 'unityEpic.png', 'Ucenje', 0),
-(6, '20.06.2026.', 'New to Unity?', 'Pokrenite Unityjev ugrađeni početnički projekt, dovršite interaktivni vodič i podijelite svoju prvu igru.', 'Vodič za početak rada s Unityjem vodi vas na kratki obilazak Unityja, završavajući stvaranjem vaše prve 3D scene, sve unutar samog Unity Editora.', 'unity.png', 'Ucenje', 0),
-(7, '20.06.2026.', 'Tečajevi', 'Pogledajte naše nove tečajeve!', 'Istražite naše najnovije tečajeve. Tečajevi detaljno istražuju teme kroz kombinaciju detaljnih vodiča i projekata.', 'course.png', 'Ucenje', 0),
-(8, '21.06.2026.', 'Uvoz web nacrta', 'Iz Unity Studija u Unity Editor: Uvoz web nacrta', 'Dizajniran je za timove koji brzo počinju s Unity Studiovim 3D tijekom rada u pregledniku, a zatim trebaju skalirati svoj rad u Unity Editoru. Nakon uvoza, Studio Logic skripte postaju C# skripte koje se mogu uređivati, dajući programerima fleksibilnost dodavanja prilagođene fizike, integracije analitike, konfiguriranja Cinemachine kamera, nadogradnje shadera i otklanjanja pogrešaka u performansama bez ponovne izgradnje projekta od nule.', 'template.png', 'Ucenje', 0);
+INSERT INTO `vijesti` (`id`, `datum`, `naslov`, `sazetak`, `tekst`, `slika`, `autor`, `kategorija`, `arhiva`) VALUES
+(1, '20.06.2026.', 'Hollow Knight', '2D akcijski Metroidvania', 'Hollow Knight je prodao više od milijun primjeraka na PC-u.', 'Hollow_Knight.jpg', 'Karlo Karlović', 'Igre', 0),
+(2, '20.06.2026.', 'Cuphead', 'Developeri Cupheada već pripremaju svoju sljedeću igru', 'Studio je naveo kako bi igra mogla, kad je u pitanju težina ponuditi nešto drugačije iskustvo od Cupheada.', 'Cuphead.png', 'Vedran Vedrić', 'Igre', 1),
+(3, '21.06.2026.', 'Hollow Knight Silksong', 'Hollow Knight: Silksong prodao se u 7 milijuna primjeraka, ekspanzija će biti besplatna', 'Hollow Knight: Silksong će u 2026. dobiti ekspanziju zvanu Sea of Sorrow. U njoj ćemo vidjeti nova područja, boss protivnike, alate i još mnogo toga. Bit će to ekspanzija podvodne tematike, a fanove će razveseliti i informacija da će ju svi vlasnici igre dobiti besplatno.', 'Silksong.jpg', 'Matija Matić', 'Igre', 0),
+(4, '20.06.2026.', 'Ori and the Blind Forest', 'U planu je treća igra iz platformerskog serijala Ori', 'Voditelj studija, Thomas Mahler, za Game Informer je izjavio kako u planu ima barem još jednu Ori igru.', 'Ori.jpg', 'Ivana Ivanić', 'Igre', 0),
+(5, '20.06.2026.', 'Unity x Epic Games', 'Udružili se Epic Games i Unity', 'Došla najava da su te dvije tvrtke dogovorile suradnju te da će Unity “na stražnja vrata” ući na Epicovu platformu.', 'unityEpic.png', 'Katija Katić', 'Ucenje', 0),
+(6, '20.06.2026.', 'New to Unity?', 'Pokrenite Unityjev ugrađeni početnički projekt, dovršite interaktivni vodič i podijelite svoju prvu igru.', 'Vodič za početak rada s Unityjem vodi vas na kratki obilazak Unityja, završavajući stvaranjem vaše prve 3D scene, sve unutar samog Unity Editora.', 'unity.png', 'Petra Perić', 'Ucenje', 0),
+(7, '20.06.2026.', 'Tečajevi', 'Pogledajte naše nove tečajeve!', 'Istražite naše najnovije tečajeve. Tečajevi detaljno istražuju teme kroz kombinaciju detaljnih vodiča i projekata.', 'course.png', 'Marko Markić', 'Ucenje', 0),
+(8, '21.06.2026.', 'Uvoz web nacrta', 'Iz Unity Studija u Unity Editor: Uvoz web nacrta', 'Dizajniran je za timove koji brzo počinju s Unity Studiovim 3D tijekom rada u pregledniku, a zatim trebaju skalirati svoj rad u Unity Editoru. Nakon uvoza, Studio Logic skripte postaju C# skripte koje se mogu uređivati, dajući programerima fleksibilnost dodavanja prilagođene fizike, integracije analitike, konfiguriranja Cinemachine kamera, nadogradnje shadera i otklanjanja pogrešaka u performansama bez ponovne izgradnje projekta od nule.', 'template.png', 'Luka Lukić', 'Ucenje', 0);
 
 --
 -- Indexes for dumped tables
@@ -101,13 +103,13 @@ ALTER TABLE `vijesti`
 -- AUTO_INCREMENT for table `korisnik`
 --
 ALTER TABLE `korisnik`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `vijesti`
 --
 ALTER TABLE `vijesti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

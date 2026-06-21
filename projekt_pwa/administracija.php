@@ -12,22 +12,24 @@ if (isset($_POST['prijava'])) {
     $prijavaImeKorisnika = $_POST['username'];
     $prijavaLozinkaKorisnika = $_POST['lozinka'];
 
-    $sql = "SELECT korisnicko_ime, lozinka, razina FROM korisnik WHERE korisnicko_ime = ?";
+    $sql = "SELECT ime, prezime, korisnicko_ime, lozinka, razina FROM korisnik WHERE korisnicko_ime = ?";
     $stmt = mysqli_stmt_init($dbc);
 
     if (mysqli_stmt_prepare($stmt, $sql)) {
         mysqli_stmt_bind_param($stmt, 's', $prijavaImeKorisnika);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
-        mysqli_stmt_bind_result($stmt, $imeKorisnikaBaza, $lozinkaKorisnika, $levelKorisnika);
+        mysqli_stmt_bind_result($stmt, $imeBaza, $prezimeBaza, $usernameBaza, $lozinkaKorisnika, $levelKorisnika);
         mysqli_stmt_fetch($stmt);
 
         if (mysqli_stmt_num_rows($stmt) > 0 && password_verify($prijavaLozinkaKorisnika, $lozinkaKorisnika)) {
             $uspjesnaPrijava = true;
             $admin = ($levelKorisnika == 1);
-            $imeKorisnika = $imeKorisnikaBaza;
+            $imeKorisnika = $usernameBaza;
 
-            $_SESSION['username'] = $imeKorisnikaBaza;
+            $_SESSION['username'] = $usernameBaza;
+            $_SESSION['ime'] = $imeBaza;
+            $_SESSION['prezime'] = $prezimeBaza;
             $_SESSION['level'] = $levelKorisnika;
         } else {
             $uspjesnaPrijava = false;
@@ -234,7 +236,7 @@ if (isset($_POST['update']) && $jeAdmin) {
 
     <footer>
         <p>Luka Mikić</p>
-        <p>luka.mikic14@gmail.com</p>
+        <p>luka.mikic@tvz.hr</p>
         <p>2026</p>
         <hr>
     </footer>
